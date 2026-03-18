@@ -9,14 +9,14 @@ import io
 # 1. 페이지 설정
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 st.set_page_config(
-    page_title="BIZ Analytics Dashboard",
-    page_icon="📊",
+    page_title="☕ 카페 창업 시뮬레이터",
+    page_icon="☕",
     layout="wide",
     initial_sidebar_state="expanded",
 )
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 2. 커스텀 CSS (프리미엄 다크 테마)
+# 2. 커스텀 CSS (커피 브라운 다크 테마)
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 st.markdown("""
 <style>
@@ -28,8 +28,8 @@ html, body, [class*="css"] {
 
 /* ── 메트릭 카드 ── */
 div[data-testid="stMetric"] {
-    background: linear-gradient(135deg, #1A1F2E 0%, #252B3B 100%);
-    border: 1px solid rgba(108, 99, 255, 0.2);
+    background: linear-gradient(135deg, #1C1410 0%, #2A1F17 100%);
+    border: 1px solid rgba(212, 165, 116, 0.2);
     border-radius: 12px;
     padding: 20px 24px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
@@ -37,11 +37,11 @@ div[data-testid="stMetric"] {
 }
 div[data-testid="stMetric"]:hover {
     transform: translateY(-4px);
-    box-shadow: 0 8px 30px rgba(108, 99, 255, 0.25);
-    border-color: rgba(108, 99, 255, 0.5);
+    box-shadow: 0 8px 30px rgba(212, 165, 116, 0.2);
+    border-color: rgba(212, 165, 116, 0.5);
 }
 div[data-testid="stMetric"] label {
-    color: #8B8FA3 !important;
+    color: #A89279 !important;
     font-size: 0.85rem !important;
     font-weight: 500 !important;
     text-transform: uppercase;
@@ -50,19 +50,19 @@ div[data-testid="stMetric"] label {
 div[data-testid="stMetric"] [data-testid="stMetricValue"] {
     font-size: 1.8rem !important;
     font-weight: 700 !important;
-    color: #FFFFFF !important;
+    color: #F5E6D3 !important;
 }
 
 /* ── 사이드바 ── */
 section[data-testid="stSidebar"] {
-    background: linear-gradient(180deg, #0E1117 0%, #151929 100%);
-    border-right: 1px solid rgba(108, 99, 255, 0.15);
+    background: linear-gradient(180deg, #0E0B08 0%, #1A1410 100%);
+    border-right: 1px solid rgba(212, 165, 116, 0.15);
 }
 
 /* ── 탭 ── */
 .stTabs [data-baseweb="tab-list"] {
     gap: 8px;
-    background-color: rgba(26, 31, 46, 0.5);
+    background-color: rgba(28, 20, 16, 0.5);
     border-radius: 12px;
     padding: 4px;
 }
@@ -73,43 +73,33 @@ section[data-testid="stSidebar"] {
     transition: all 0.3s ease;
 }
 .stTabs [aria-selected="true"] {
-    background-color: rgba(108, 99, 255, 0.2) !important;
+    background-color: rgba(212, 165, 116, 0.15) !important;
     border-color: transparent !important;
 }
 
 /* ── 차트 컨테이너 ── */
 div[data-testid="stPlotlyChart"] {
-    background: rgba(26, 31, 46, 0.4);
+    background: rgba(28, 20, 16, 0.4);
     border-radius: 12px;
     padding: 8px;
-    border: 1px solid rgba(108, 99, 255, 0.1);
+    border: 1px solid rgba(212, 165, 116, 0.1);
     transition: border-color 0.3s ease;
 }
 div[data-testid="stPlotlyChart"]:hover {
-    border-color: rgba(108, 99, 255, 0.3);
+    border-color: rgba(212, 165, 116, 0.3);
 }
 
 /* ── 데이터프레임 ── */
 div[data-testid="stDataFrame"] {
     border-radius: 12px;
     overflow: hidden;
-    border: 1px solid rgba(108, 99, 255, 0.15);
+    border: 1px solid rgba(212, 165, 116, 0.15);
 }
 
 /* ── 버튼 ── */
-.stButton > button {
-    border-radius: 8px;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    border: 1px solid rgba(108, 99, 255, 0.3);
-}
-.stButton > button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(108, 99, 255, 0.3);
-}
 .stDownloadButton > button {
-    background: linear-gradient(135deg, #6C63FF 0%, #5A52E0 100%);
-    color: white;
+    background: linear-gradient(135deg, #D4A574 0%, #8B6914 100%);
+    color: #1C1410;
     border: none;
     border-radius: 8px;
     font-weight: 600;
@@ -118,25 +108,24 @@ div[data-testid="stDataFrame"] {
 }
 .stDownloadButton > button:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(108, 99, 255, 0.4);
+    box-shadow: 0 6px 20px rgba(212, 165, 116, 0.4);
 }
 
 /* ── 스크롤바 ── */
 ::-webkit-scrollbar { width: 6px; height: 6px; }
-::-webkit-scrollbar-track { background: #0E1117; }
-::-webkit-scrollbar-thumb { background: #6C63FF; border-radius: 3px; }
+::-webkit-scrollbar-track { background: #0E0B08; }
+::-webkit-scrollbar-thumb { background: #D4A574; border-radius: 3px; }
 
-/* ── Divider ── */
-hr { border-color: rgba(108, 99, 255, 0.15) !important; }
+hr { border-color: rgba(212, 165, 116, 0.15) !important; }
 .block-container { padding-top: 2rem; }
 
-/* ── 커스텀 HTML 컴포넌트 ── */
+/* ── 커스텀 컴포넌트 ── */
 .gradient-title {
-    background: linear-gradient(120deg, #6C63FF 0%, #00D2FF 50%, #6C63FF 100%);
+    background: linear-gradient(120deg, #D4A574 0%, #F5D5A0 30%, #D4A574 60%, #8B6914 100%);
     background-size: 200% auto;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: gradient-shift 3s ease infinite;
+    animation: gradient-shift 4s ease infinite;
     font-size: 2.2rem;
     font-weight: 700;
     margin-bottom: 0.5rem;
@@ -146,22 +135,18 @@ hr { border-color: rgba(108, 99, 255, 0.15) !important; }
     50% { background-position: 100% center; }
     100% { background-position: 0% center; }
 }
-.page-subtitle {
-    color: #8B8FA3;
-    font-size: 1rem;
-    margin-bottom: 2rem;
-}
+.page-subtitle { color: #A89279; font-size: 1rem; margin-bottom: 2rem; }
 .section-header {
-    color: #C8C8FF;
+    color: #F5D5A0;
     font-size: 1.15rem;
     font-weight: 600;
     margin: 1.5rem 0 1rem 0;
     padding-left: 12px;
-    border-left: 3px solid #6C63FF;
+    border-left: 3px solid #D4A574;
 }
 .kpi-card {
-    background: linear-gradient(135deg, #1A1F2E 0%, #252B3B 100%);
-    border: 1px solid rgba(108, 99, 255, 0.2);
+    background: linear-gradient(135deg, #1C1410 0%, #2A1F17 100%);
+    border: 1px solid rgba(212, 165, 116, 0.2);
     border-radius: 16px;
     padding: 24px;
     text-align: center;
@@ -174,127 +159,53 @@ hr { border-color: rgba(108, 99, 255, 0.15) !important; }
     position: absolute;
     top: 0; left: 0; right: 0;
     height: 3px;
-    background: linear-gradient(90deg, #6C63FF, #00D2FF);
+    background: linear-gradient(90deg, #D4A574, #F5D5A0);
 }
 .kpi-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 8px 30px rgba(108, 99, 255, 0.2);
+    box-shadow: 0 8px 30px rgba(212, 165, 116, 0.15);
 }
 .kpi-icon { font-size: 2rem; margin-bottom: 8px; }
-.kpi-value { font-size: 2rem; font-weight: 700; color: #FFFFFF; margin: 4px 0; }
-.kpi-label { font-size: 0.85rem; color: #8B8FA3; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+.kpi-value { font-size: 2rem; font-weight: 700; color: #F5E6D3; margin: 4px 0; }
+.kpi-label { font-size: 0.85rem; color: #A89279; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
 .kpi-delta { font-size: 0.85rem; font-weight: 600; padding: 4px 12px; border-radius: 20px; display: inline-block; }
-.kpi-delta.positive { color: #00E676; background: rgba(0, 230, 118, 0.1); }
-.kpi-delta.negative { color: #FF5252; background: rgba(255, 82, 82, 0.1); }
+.kpi-delta.positive { color: #6BCB77; background: rgba(107, 203, 119, 0.1); }
+.kpi-delta.negative { color: #FF6B6B; background: rgba(255, 107, 107, 0.1); }
+.kpi-delta.neutral { color: #D4A574; background: rgba(212, 165, 116, 0.1); }
 </style>
 """, unsafe_allow_html=True)
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 3. 차트 설정 (공통 다크 테마)
+# 3. 차트 공통 설정
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-COLORS = ["#6C63FF", "#00D2FF", "#FF6B6B", "#FFD93D", "#6BCB77", "#EE82EE", "#FFA07A"]
+COLORS = ["#D4A574", "#F5D5A0", "#8B6914", "#6BCB77", "#FF6B6B", "#5DADE2", "#C39BD3"]
 DARK_LAYOUT = dict(
     paper_bgcolor="rgba(0,0,0,0)",
     plot_bgcolor="rgba(0,0,0,0)",
-    font=dict(family="Inter, sans-serif", color="#E0E0E0", size=12),
+    font=dict(family="Inter, sans-serif", color="#E0D5C8", size=12),
     margin=dict(l=20, r=20, t=40, b=20),
-    legend=dict(
-        bgcolor="rgba(0,0,0,0)", font=dict(size=11),
-        orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1,
-    ),
-    xaxis=dict(gridcolor="rgba(108,99,255,0.08)", zerolinecolor="rgba(108,99,255,0.1)"),
-    yaxis=dict(gridcolor="rgba(108,99,255,0.08)", zerolinecolor="rgba(108,99,255,0.1)"),
-    hoverlabel=dict(bgcolor="#1A1F2E", font_size=12, font_color="#E0E0E0"),
+    legend=dict(bgcolor="rgba(0,0,0,0)", font=dict(size=11),
+                orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1),
+    xaxis=dict(gridcolor="rgba(212,165,116,0.08)", zerolinecolor="rgba(212,165,116,0.1)"),
+    yaxis=dict(gridcolor="rgba(212,165,116,0.08)", zerolinecolor="rgba(212,165,116,0.1)"),
+    hoverlabel=dict(bgcolor="#1C1410", font_size=12, font_color="#F5E6D3"),
 )
 
 
 def apply_dark(fig, title=""):
-    """Plotly Figure에 다크 테마를 적용합니다."""
     fig.update_layout(**DARK_LAYOUT)
     if title:
-        fig.update_layout(title=dict(text=title, font=dict(size=16, color="#C8C8FF")))
+        fig.update_layout(title=dict(text=title, font=dict(size=16, color="#F5D5A0")))
     return fig
 
 
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 4. 데이터 생성 (캐싱)
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-@st.cache_data
-def generate_sales_data():
-    """계절성과 트렌드를 반영한 다차원 비즈니스 가상 데이터를 생성합니다."""
-    np.random.seed(42)
-    dates = pd.date_range(start="2025-01-01", end="2025-12-31", freq="D")
-    categories = ["전자제품", "의류", "식품", "뷰티", "가구"]
-    regions = ["서울", "부산", "대구", "제주"]
-    base_sales = {"전자제품": 3500000, "의류": 2200000,
-                  "식품": 1800000, "뷰티": 1500000, "가구": 2800000}
-    region_weights = {"서울": 1.3, "부산": 1.0, "대구": 0.85, "제주": 0.65}
-    seasonal = {
-        "전자제품": [0.8, 0.7, 0.9, 0.85, 0.9, 1.0, 0.95, 0.9, 1.1, 1.0, 1.3, 1.5],
-        "의류":     [1.2, 1.1, 1.3, 1.0, 0.9, 0.8, 0.7, 0.8, 1.1, 1.2, 1.3, 1.4],
-        "식품":     [1.0, 0.95, 1.0, 1.0, 1.05, 1.1, 1.15, 1.1, 1.05, 1.0, 1.0, 1.1],
-        "뷰티":    [0.9, 1.0, 1.1, 1.0, 1.2, 1.1, 1.0, 1.0, 1.1, 1.0, 1.15, 1.3],
-        "가구":     [0.7, 0.8, 1.1, 1.2, 1.0, 0.9, 0.8, 0.9, 1.0, 1.1, 1.0, 0.9],
-    }
-    records = []
-    for date in dates:
-        for cat in categories:
-            for region in regions:
-                m = date.month - 1
-                trend = 1 + m * 0.015
-                base = base_sales[cat] * region_weights[region] * seasonal[cat][m] * trend
-                sales = int(base * np.random.uniform(0.80, 1.20))
-                orders = max(1, int(sales / np.random.randint(30000, 80000)))
-                visitors = int(orders * np.random.uniform(8, 15))
-                satisfaction = round(np.random.uniform(3.5, 5.0), 1)
-                records.append({
-                    "날짜": date, "카테고리": cat, "지역": region,
-                    "매출액": sales, "주문수": orders,
-                    "방문자수": visitors, "고객만족도": satisfaction,
-                })
-    return pd.DataFrame(records)
+def section_header(text):
+    st.markdown(f'<div class="section-header">{text}</div>', unsafe_allow_html=True)
 
 
-@st.cache_data
-def generate_customer_data():
-    """고객 세그먼트 분석용 가상 데이터를 생성합니다."""
-    np.random.seed(123)
-    n = 2000
-    age_groups = np.random.choice(
-        ["10대", "20대", "30대", "40대", "50대", "60대+"],
-        size=n, p=[0.05, 0.25, 0.30, 0.22, 0.13, 0.05])
-    genders = np.random.choice(["남성", "여성"], size=n, p=[0.45, 0.55])
-    channels = np.random.choice(
-        ["검색엔진", "SNS", "직접방문", "이메일", "제휴사"],
-        size=n, p=[0.30, 0.28, 0.20, 0.12, 0.10])
-    age_purchase = {"10대": 35000, "20대": 55000, "30대": 85000,
-                    "40대": 95000, "50대": 75000, "60대+": 60000}
-    purchase_amounts = [int(age_purchase[a] * np.random.uniform(0.5, 2.0)) for a in age_groups]
-    is_repeat = np.random.choice([True, False], size=n, p=[0.35, 0.65])
-    months = np.random.choice(range(1, 13), size=n)
-    return pd.DataFrame({
-        "고객ID": [f"C{str(i).zfill(5)}" for i in range(1, n + 1)],
-        "연령대": age_groups, "성별": genders, "유입채널": channels,
-        "구매금액": purchase_amounts, "재구매여부": is_repeat, "구매월": months,
-    })
-
-
-@st.cache_data
-def generate_funnel_data():
-    """전환 펀넬 데이터를 생성합니다."""
-    return pd.DataFrame({
-        "단계": ["사이트 방문", "상품 조회", "장바구니 추가", "결제 시작", "결제 완료"],
-        "사용자수": [50000, 32000, 18000, 12000, 8500],
-    })
-
-
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 5. 헬퍼 함수
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-def kpi_card(icon, label, value, delta="", positive=True):
-    """HTML 기반 프리미엄 KPI 카드를 렌더링합니다."""
-    d_cls = "positive" if positive else "negative"
-    d_arrow = "▲" if positive else "▼"
+def kpi_card(icon, label, value, delta="", status="positive"):
+    d_cls = status
+    d_arrow = "▲" if status == "positive" else ("▼" if status == "negative" else "●")
     d_html = f'<div class="kpi-delta {d_cls}">{d_arrow} {delta}</div>' if delta else ""
     st.markdown(f"""
     <div class="kpi-card">
@@ -305,462 +216,700 @@ def kpi_card(icon, label, value, delta="", positive=True):
     </div>""", unsafe_allow_html=True)
 
 
-def section_header(text):
-    """좌측 액센트 보더가 있는 섹션 헤더를 렌더링합니다."""
-    st.markdown(f'<div class="section-header">{text}</div>', unsafe_allow_html=True)
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# 4. 상권 등급 데이터 (현실 기반)
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+LOCATION_DATA = {
+    "S급 (강남역·명동급)": {"deposit_per_pyeong": 300, "rent_per_pyeong": 20, "turnover": 5.5, "desc": "유동인구 최상위, 높은 임대료"},
+    "A급 (홍대·이태원급)": {"deposit_per_pyeong": 200, "rent_per_pyeong": 14, "turnover": 4.5, "desc": "유동인구 상위, 젊은 고객층"},
+    "B급 (일반 상가)":     {"deposit_per_pyeong": 150, "rent_per_pyeong": 10, "turnover": 3.5, "desc": "보통 유동인구, 안정적 수요"},
+    "C급 (주택가)":        {"deposit_per_pyeong": 100, "rent_per_pyeong": 6,  "turnover": 2.5, "desc": "단골 중심, 낮은 임대료"},
+}
 
+SEASONAL_FACTOR = {
+    "1월": 0.70, "2월": 0.75, "3월": 1.00, "4월": 1.10, "5월": 1.15,
+    "6월": 0.90, "7월": 0.80, "8월": 0.80, "9월": 1.05, "10월": 1.10,
+    "11월": 0.95, "12월": 1.15,
+}
 
-def sparkline(values, color="#6C63FF", height=60):
-    """미니 스파크라인 차트를 생성합니다."""
-    fig = go.Figure(go.Scatter(
-        y=values, mode="lines",
-        line=dict(color=color, width=2),
-        fill="tozeroy",
-        fillcolor=f"rgba({int(color[1:3],16)},{int(color[3:5],16)},{int(color[5:7],16)},0.15)",
-    ))
-    fig.update_layout(
-        paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
-        margin=dict(l=0, r=0, t=0, b=0), height=height,
-        xaxis=dict(visible=False), yaxis=dict(visible=False), showlegend=False,
-    )
-    return fig
+HOUR_WEIGHT = {
+    "08-09": 0.08, "09-10": 0.12, "10-11": 0.10, "11-12": 0.09,
+    "12-13": 0.11, "13-14": 0.10, "14-15": 0.09, "15-16": 0.08,
+    "16-17": 0.07, "17-18": 0.06, "18-19": 0.04, "19-20": 0.03,
+    "20-21": 0.02, "21-22": 0.01,
+}
 
+DAY_WEIGHT = {"월": 0.90, "화": 0.95, "수": 1.00, "목": 1.00, "금": 1.15, "토": 1.20, "일": 0.80}
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 6. 데이터 로딩
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-df_all = generate_sales_data()
-cust_df_all = generate_customer_data()
-funnel_df = generate_funnel_data()
-
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 7. 사이드바 (글로벌 필터)
+# 5. 사이드바 — 핵심 파라미터 입력
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 with st.sidebar:
     st.markdown("""
     <div style="text-align:center; padding:1rem 0 1.5rem 0;">
-        <div style="font-size:2.5rem; margin-bottom:4px;">📊</div>
-        <div style="font-size:1.1rem; font-weight:700; color:#C8C8FF; letter-spacing:1px;">
-            BIZ ANALYTICS</div>
-        <div style="font-size:0.75rem; color:#8B8FA3; margin-top:2px;">
-            Business Intelligence Dashboard</div>
+        <div style="font-size:2.5rem; margin-bottom:4px;">☕</div>
+        <div style="font-size:1.1rem; font-weight:700; color:#F5D5A0; letter-spacing:1px;">
+            CAFE SIMULATOR</div>
+        <div style="font-size:0.75rem; color:#A89279; margin-top:2px;">
+            현실 기반 카페 창업 시뮬레이터</div>
     </div>""", unsafe_allow_html=True)
     st.divider()
 
-    st.header("🎛️ 필터 설정")
+    # ── 📍 입지 & 매장 ──
+    st.header("📍 입지 & 매장")
+    location_grade = st.selectbox("상권 등급", list(LOCATION_DATA.keys()), index=2)
+    loc = LOCATION_DATA[location_grade]
+    st.caption(f"💡 {loc['desc']}")
 
-    # 기간 프리셋
-    period = st.radio("📅 분석 기간", ["전체", "최근 30일", "최근 90일", "상반기", "하반기", "커스텀"], horizontal=False)
-    if period == "커스텀":
-        date_range = st.date_input("날짜 범위", value=[df_all["날짜"].min(), df_all["날짜"].max()],
-                                   min_value=df_all["날짜"].min(), max_value=df_all["날짜"].max())
-        if len(date_range) == 2:
-            df_all = df_all[(df_all["날짜"] >= pd.to_datetime(date_range[0])) &
-                            (df_all["날짜"] <= pd.to_datetime(date_range[1]))]
-    elif period == "최근 30일":
-        df_all = df_all[df_all["날짜"] >= df_all["날짜"].max() - pd.Timedelta(days=30)]
-    elif period == "최근 90일":
-        df_all = df_all[df_all["날짜"] >= df_all["날짜"].max() - pd.Timedelta(days=90)]
-    elif period == "상반기":
-        df_all = df_all[df_all["날짜"].dt.month <= 6]
-    elif period == "하반기":
-        df_all = df_all[df_all["날짜"].dt.month > 6]
+    area_pyeong = st.slider("매장 면적 (평)", 8, 40, 15)
+
+    rec_deposit = loc["deposit_per_pyeong"] * area_pyeong
+    rec_rent = loc["rent_per_pyeong"] * area_pyeong
+    st.caption(f"📌 추천값: 보증금 {rec_deposit:,}만 / 월세 {rec_rent:,}만")
+
+    deposit = st.number_input("보증금 (만원)", 500, 20000, rec_deposit, step=100)
+    monthly_rent = st.number_input("월 임대료 (만원)", 50, 1000, rec_rent, step=10)
 
     st.divider()
 
-    # 카테고리 필터
-    selected_cats = st.multiselect("🏷️ 카테고리", df_all["카테고리"].unique().tolist(),
-                                   default=df_all["카테고리"].unique().tolist())
-    # 지역 필터
-    selected_regions = st.multiselect("📍 지역", df_all["지역"].unique().tolist(),
-                                      default=df_all["지역"].unique().tolist())
+    # ── 👥 인력 ──
+    st.header("👥 인력 설정")
+    owner_works = st.toggle("사장 본인 근무", value=True)
+    full_time_count = st.number_input("정규직 바리스타 (명)", 0, 5, 1)
+    part_time_count = st.number_input("파트타임 직원 (명)", 0, 8, 2)
+    full_time_salary = st.number_input("정규직 월급 (만원)", 200, 350, 230, step=10)
+    part_time_hourly = st.number_input("파트타임 시급 (원)", 9860, 15000, 10030, step=100)
+    part_time_hours = st.slider("파트타임 일 근무시간", 3, 8, 5)
 
     st.divider()
-    st.markdown('<div style="text-align:center; color:#8B8FA3; font-size:0.75rem;">'
-                '© 2025 BIZ Analytics<br>Powered by Streamlit</div>', unsafe_allow_html=True)
 
-# 필터 적용
-filtered = df_all[df_all["카테고리"].isin(selected_cats) & df_all["지역"].isin(selected_regions)]
+    # ── 🏷️ 메뉴 전략 ──
+    st.header("🏷️ 메뉴 & 가격")
+    drink_price = st.number_input("대표 음료 가격 (원)", 3000, 8000, 4500, step=100)
+    avg_unit_price = st.number_input("평균 객단가 (원)", 3500, 12000, 5800, step=100)
+    cost_ratio = st.slider("원재료비율 (%)", 25, 50, 35) / 100
+    takeout_ratio = st.slider("테이크아웃 비율 (%)", 10, 80, 45) / 100
+    dessert_ratio = st.slider("디저트/사이드 구매율 (%)", 10, 50, 25) / 100
 
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 8. KPI 계산
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-total_sales = filtered["매출액"].sum()
-total_orders = filtered["주문수"].sum()
-avg_satisfaction = filtered["고객만족도"].mean()
-avg_unit_price = int(total_sales / max(total_orders, 1))
+    st.divider()
 
-# 전반/후반 비교
-mid = filtered["날짜"].min() + (filtered["날짜"].max() - filtered["날짜"].min()) / 2
-first_h = filtered[filtered["날짜"] <= mid]["매출액"].sum()
-second_h = filtered[filtered["날짜"] > mid]["매출액"].sum()
-sales_delta = round((second_h - first_h) / max(first_h, 1) * 100, 1)
+    # ── 📅 운영 ──
+    st.header("📅 운영 설정")
+    open_hour = st.number_input("영업 시작 (시)", 6, 12, 8)
+    close_hour = st.number_input("영업 종료 (시)", 18, 24, 22)
+    holidays_per_month = st.number_input("월 휴무일 수", 0, 8, 4)
 
-first_o = filtered[filtered["날짜"] <= mid]["주문수"].sum()
-second_o = filtered[filtered["날짜"] > mid]["주문수"].sum()
-orders_delta = round((second_o - first_o) / max(first_o, 1) * 100, 1)
+    st.divider()
+    st.markdown('<div style="text-align:center; color:#A89279; font-size:0.75rem;">'
+                '© 2025 Cafe Simulator<br>Powered by Streamlit</div>', unsafe_allow_html=True)
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 9. 메인 헤더 + KPI
+# 6. 핵심 계산 모델
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-st.markdown('<div class="gradient-title">📊 BIZ Analytics Dashboard</div>'
-            '<div class="page-subtitle">비즈니스 핵심 성과를 한눈에 파악하세요</div>',
+operating_days = 30 - holidays_per_month
+operating_hours = close_hour - open_hour
+
+# ── 좌석 수 & 일 평균 고객 ──
+seats = int(area_pyeong * 0.8)
+seat_customers = seats * loc["turnover"]
+takeout_extra = seat_customers * (takeout_ratio / max(1 - takeout_ratio, 0.01))
+daily_customers = int(seat_customers + takeout_extra)
+
+# ── 매출 ──
+daily_revenue = daily_customers * avg_unit_price
+monthly_revenue = daily_revenue * operating_days
+
+# ── 인건비 ──
+ft_labor = full_time_salary * 10000 * full_time_count  # 원 단위
+pt_labor = part_time_hourly * part_time_hours * 26 * part_time_count
+total_labor = ft_labor + pt_labor
+
+# ── 인테리어 비용 (등급별) ──
+interior_per_pyeong = {"S급 (강남역·명동급)": 400, "A급 (홍대·이태원급)": 350,
+                       "B급 (일반 상가)": 280, "C급 (주택가)": 200}
+interior_cost = interior_per_pyeong[location_grade] * area_pyeong  # 만원
+
+# ── 초기 비용 ──
+startup_costs = {
+    "보증금": deposit,
+    "인테리어": interior_cost,
+    "커피머신 (에스프레소)": 1500,
+    "그라인더": 300,
+    "기타 장비 (제빙기·냉장고 등)": 800,
+    "가구/집기": area_pyeong * 40,
+    "간판/사이니지": 200,
+    "POS/결제 시스템": 150,
+    "초기 원재료": 200,
+    "인허가/법무 비용": 100,
+}
+
+# ── 월 고정비 (원 단위) ──
+insurance_rate = 0.095
+card_fee_rate = 0.015
+utility_per_pyeong = 80000  # 월 평당 전기수도가스
+
+monthly_fixed_costs = {
+    "임대료": monthly_rent * 10000,
+    "인건비": total_labor,
+    "4대보험 (사업주 부담)": int(total_labor * insurance_rate),
+    "전기/수도/가스": area_pyeong * utility_per_pyeong,
+    "통신/인터넷": 50000,
+    "카드수수료": int(monthly_revenue * card_fee_rate),
+    "소모품 (컵/냅킨 등)": 200000,
+    "마케팅/광고": 300000,
+    "감가상각비": int((interior_cost + 1500 + 300 + 800) * 10000 / 60),  # 5년 상각
+    "기타 잡비": 150000,
+}
+
+# ── 월 변동비 (원 단위) ──
+monthly_variable_costs = {
+    "원재료비": int(monthly_revenue * cost_ratio),
+}
+
+# ── 총계 ──
+total_startup = sum(startup_costs.values())
+startup_costs["예비 운영자금 (3개월)"] = int((sum(monthly_fixed_costs.values()) + sum(monthly_variable_costs.values())) / 10000 * 3)
+total_startup_with_reserve = sum(startup_costs.values())
+
+total_monthly_fixed = sum(monthly_fixed_costs.values())
+total_monthly_variable = sum(monthly_variable_costs.values())
+total_monthly_cost = total_monthly_fixed + total_monthly_variable
+monthly_profit = monthly_revenue - total_monthly_cost
+profit_margin = (monthly_profit / max(monthly_revenue, 1)) * 100
+
+# ── BEP ──
+bep_daily_revenue = total_monthly_fixed / max(1 - cost_ratio, 0.01) / max(operating_days, 1)
+bep_daily_customers = bep_daily_revenue / max(avg_unit_price, 1)
+months_to_recover = total_startup_with_reserve * 10000 / max(monthly_profit, 1) if monthly_profit > 0 else float('inf')
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# 7. 메인 헤더
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+st.markdown('<div class="gradient-title">☕ 카페 창업 시뮬레이터</div>'
+            '<div class="page-subtitle">현실 기반 비용 분석 · 매출 시뮬레이션 · 손익분기점 계산</div>',
             unsafe_allow_html=True)
 
-c1, c2, c3, c4 = st.columns(4)
-with c1:
-    kpi_card("💰", "총 매출액", f"{total_sales:,.0f}원",
-             f"{abs(sales_delta)}% (후반기)", sales_delta >= 0)
-with c2:
-    kpi_card("📦", "총 주문 수", f"{total_orders:,}건",
-             f"{abs(orders_delta)}% (후반기)", orders_delta >= 0)
-with c3:
-    kpi_card("💳", "평균 객단가", f"{avg_unit_price:,}원")
-with c4:
-    kpi_card("⭐", "고객 만족도", f"{avg_satisfaction:.2f}점",
-             "목표 4.5점 이상", avg_satisfaction >= 4.5)
+# ── 요약 KPI ──
+k1, k2, k3, k4 = st.columns(4)
+with k1:
+    kpi_card("🏗️", "총 초기 투자금", f"{total_startup_with_reserve:,}만원")
+with k2:
+    kpi_card("💰", "월 예상 매출", f"{monthly_revenue:,.0f}원",
+             f"일 {daily_customers}명 × {avg_unit_price:,}원", "neutral")
+with k3:
+    profit_status = "positive" if monthly_profit > 0 else "negative"
+    kpi_card("📈", "월 순이익", f"{monthly_profit:,.0f}원",
+             f"순이익률 {profit_margin:.1f}%", profit_status)
+with k4:
+    if months_to_recover < float('inf') and months_to_recover > 0:
+        kpi_card("🎯", "투자금 회수", f"{months_to_recover:.1f}개월",
+                 "흑자 전환 시 기준", "positive" if months_to_recover < 36 else "negative")
+    else:
+        kpi_card("🎯", "투자금 회수", "적자 상태",
+                 "수익 모델 재검토 필요", "negative")
 
 st.markdown("")
 st.divider()
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 10. 메인 탭 (4개 영역)
+# 8. 탭 구성
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-tab_overview, tab_sales, tab_customer, tab_data = st.tabs(
-    ["🏠 종합 개요", "📊 매출 분석", "👥 고객 분석", "📋 데이터 관리"]
+tab1, tab2, tab3, tab4, tab5 = st.tabs(
+    ["🏠 초기 창업 비용", "💰 월간 손익", "📊 시간대·요일 분석", "🎯 손익분기점", "⚖️ 시나리오 비교"]
 )
 
 # ──────────────────────────────────────────────
-# 탭 1: 종합 개요
+# 탭 1: 초기 창업 비용
 # ──────────────────────────────────────────────
-with tab_overview:
-    section_header("📈 월별 추이 요약")
-    monthly = filtered.groupby(filtered["날짜"].dt.to_period("M")).agg(
-        매출액=("매출액", "sum"), 주문수=("주문수", "sum"),
-        방문자수=("방문자수", "sum"), 고객만족도=("고객만족도", "mean"),
-    ).reset_index()
+with tab1:
+    section_header("초기 투자 비용 내역")
 
-    sp1, sp2, sp3, sp4 = st.columns(4)
-    with sp1:
-        st.caption("월별 매출 추이")
-        st.plotly_chart(sparkline(monthly["매출액"].tolist(), "#6C63FF"), use_container_width=True)
-    with sp2:
-        st.caption("월별 주문 추이")
-        st.plotly_chart(sparkline(monthly["주문수"].tolist(), "#00D2FF"), use_container_width=True)
-    with sp3:
-        st.caption("월별 방문자 추이")
-        st.plotly_chart(sparkline(monthly["방문자수"].tolist(), "#FFD93D"), use_container_width=True)
-    with sp4:
-        st.caption("월별 만족도 추이")
-        st.plotly_chart(sparkline(monthly["고객만족도"].tolist(), "#6BCB77"), use_container_width=True)
+    s1, s2 = st.columns([3, 2])
+
+    with s1:
+        # 수평 막대 차트
+        cost_df = pd.DataFrame({"항목": list(startup_costs.keys()),
+                                "금액(만원)": list(startup_costs.values())})
+        cost_df = cost_df.sort_values("금액(만원)", ascending=True)
+        fig_bar = px.bar(cost_df, x="금액(만원)", y="항목", orientation="h",
+                         color_discrete_sequence=["#D4A574"])
+        fig_bar.update_traces(marker_line_width=0, opacity=0.9,
+                              text=cost_df["금액(만원)"].apply(lambda x: f"{x:,}만"),
+                              textposition="outside", textfont=dict(color="#F5D5A0", size=11))
+        apply_dark(fig_bar, "항목별 투자 비용")
+        fig_bar.update_layout(height=450)
+        st.plotly_chart(fig_bar, use_container_width=True)
+
+    with s2:
+        # 도넛 차트
+        fig_donut = px.pie(cost_df, names="항목", values="금액(만원)", hole=0.55,
+                           color_discrete_sequence=COLORS)
+        fig_donut.update_traces(textposition="inside", textinfo="percent",
+                                marker=dict(line=dict(color="#0E0B08", width=2)))
+        apply_dark(fig_donut, "비용 구성 비율")
+        fig_donut.update_layout(height=450)
+        st.plotly_chart(fig_donut, use_container_width=True)
 
     st.markdown("")
-    section_header("🗂️ 카테고리 · 지역 한눈에 보기")
+    section_header("비용 상세 내역")
 
-    ov1, ov2 = st.columns(2)
-    with ov1:
-        cat_s = filtered.groupby("카테고리").agg(매출액=("매출액", "sum")).reset_index()
-        fig_pie = px.pie(cat_s, names="카테고리", values="매출액", hole=0.55,
-                         color_discrete_sequence=COLORS)
-        fig_pie.update_traces(textposition="inside", textinfo="percent+label",
-                              marker=dict(line=dict(color="#0E1117", width=2)))
-        st.plotly_chart(apply_dark(fig_pie, "카테고리별 매출 비율"), use_container_width=True)
+    # 테이블
+    detail_df = cost_df.sort_values("금액(만원)", ascending=False).copy()
+    detail_df["비율"] = (detail_df["금액(만원)"] / total_startup_with_reserve * 100).round(1)
+    detail_df["비율"] = detail_df["비율"].astype(str) + "%"
+    detail_df["금액(만원)"] = detail_df["금액(만원)"].apply(lambda x: f"{x:,}")
+    st.dataframe(detail_df, use_container_width=True, hide_index=True, height=400)
 
-    with ov2:
-        reg_s = filtered.groupby("지역").agg(매출액=("매출액", "sum")).reset_index().sort_values("매출액", ascending=True)
-        fig_bar = px.bar(reg_s, x="매출액", y="지역", orientation="h", color_discrete_sequence=COLORS)
-        fig_bar.update_traces(marker_line_width=0, opacity=0.9)
-        st.plotly_chart(apply_dark(fig_bar, "지역별 총 매출 비교"), use_container_width=True)
+    st.markdown("")
+    with st.expander("💡 비용 산출 근거 보기"):
+        st.markdown(f"""
+        | 항목 | 산출 근거 |
+        |------|---------|
+        | 보증금 | 사용자 직접 입력 ({deposit:,}만원) |
+        | 인테리어 | {area_pyeong}평 × {interior_per_pyeong[location_grade]}만/평 = {interior_cost:,}만원 |
+        | 커피머신 | 반자동 에스프레소 머신 기준 1,500만원 |
+        | 그라인더 | 상업용 전동 그라인더 300만원 |
+        | 기타 장비 | 제빙기 + 업소용 냉장고 + 블렌더 등 800만원 |
+        | 가구/집기 | {area_pyeong}평 × 40만/평 = {area_pyeong * 40:,}만원 |
+        | 예비 운영자금 | 월 고정비+변동비의 3개월분 |
+        """)
 
 # ──────────────────────────────────────────────
-# 탭 2: 매출 분석
+# 탭 2: 월간 손익 시뮬레이션
 # ──────────────────────────────────────────────
-with tab_sales:
-    stab1, stab2, stab3 = st.tabs(["📈 매출 추이", "🗺️ 히트맵 · 트리맵", "📦 분포 분석"])
+with tab2:
+    section_header("월간 손익 요약")
 
-    with stab1:
-        section_header("일별 매출 추이 (이동평균 포함)")
-        daily = filtered.groupby("날짜").agg(매출액=("매출액", "sum")).reset_index()
-        fig_area = px.area(daily, x="날짜", y="매출액", color_discrete_sequence=COLORS)
-        fig_area.update_traces(line=dict(width=1.5), opacity=0.7)
-        if len(daily) > 7:
-            ma = daily["매출액"].rolling(window=7, min_periods=1).mean()
-            fig_area.add_trace(go.Scatter(
-                x=daily["날짜"], y=ma, mode="lines", name="7일 이동평균",
-                line=dict(color="#FFD93D", width=2.5, dash="dot"),
-            ))
-        st.plotly_chart(apply_dark(fig_area, "일별 총 매출 + 7일 이동평균"), use_container_width=True)
+    m1, m2, m3, m4 = st.columns(4)
+    m1.metric("월 매출", f"{monthly_revenue:,.0f}원")
+    m2.metric("월 고정비", f"{total_monthly_fixed:,.0f}원")
+    m3.metric("월 변동비", f"{total_monthly_variable:,.0f}원")
+    m4.metric("월 순이익", f"{monthly_profit:,.0f}원",
+              f"{profit_margin:.1f}%", delta_color="normal" if monthly_profit >= 0 else "inverse")
 
-        st.markdown("")
-        section_header("카테고리별 매출 추이")
-        daily_cat = filtered.groupby(["날짜", "카테고리"]).agg(매출액=("매출액", "sum")).reset_index()
-        fig_cat = px.area(daily_cat, x="날짜", y="매출액", color="카테고리", color_discrete_sequence=COLORS)
-        fig_cat.update_traces(line=dict(width=1.5), opacity=0.7)
-        st.plotly_chart(apply_dark(fig_cat, "카테고리별 일별 매출"), use_container_width=True)
+    st.divider()
 
-    with stab2:
-        section_header("지역 × 카테고리 히트맵")
-        pivot_heat = filtered.pivot_table(values="매출액", index="지역", columns="카테고리", aggfunc="sum")
+    # ── 폭포 차트 (Waterfall) ──
+    section_header("매출 → 순이익 흐름 (Waterfall Chart)")
+
+    wf_labels = ["월 매출"]
+    wf_values = [monthly_revenue]
+    wf_measures = ["absolute"]
+
+    # 주요 비용 항목 (큰 항목 위주)
+    major_costs = sorted(monthly_fixed_costs.items(), key=lambda x: -x[1])
+    for name, val in major_costs:
+        wf_labels.append(name)
+        wf_values.append(-val)
+        wf_measures.append("relative")
+
+    wf_labels.append("원재료비")
+    wf_values.append(-monthly_variable_costs["원재료비"])
+    wf_measures.append("relative")
+
+    wf_labels.append("순이익")
+    wf_values.append(monthly_profit)
+    wf_measures.append("total")
+
+    fig_wf = go.Figure(go.Waterfall(
+        x=wf_labels, y=wf_values, measure=wf_measures,
+        connector=dict(line=dict(color="rgba(212,165,116,0.3)", width=1)),
+        increasing=dict(marker=dict(color="#6BCB77")),
+        decreasing=dict(marker=dict(color="#FF6B6B")),
+        totals=dict(marker=dict(color="#D4A574")),
+        textposition="outside",
+        text=[f"{abs(v):,.0f}" for v in wf_values],
+        textfont=dict(size=10, color="#F5D5A0"),
+    ))
+    apply_dark(fig_wf, "월 매출에서 순이익까지의 흐름")
+    fig_wf.update_layout(height=500, showlegend=False)
+    fig_wf.update_xaxes(tickangle=-45)
+    st.plotly_chart(fig_wf, use_container_width=True)
+
+    st.markdown("")
+    wc1, wc2 = st.columns(2)
+
+    with wc1:
+        section_header("비용 구성 (고정비 vs 변동비)")
+        comp_df = pd.DataFrame({
+            "구분": ["고정비", "변동비"],
+            "금액": [total_monthly_fixed, total_monthly_variable],
+        })
+        fig_comp = px.pie(comp_df, names="구분", values="금액", hole=0.55,
+                          color_discrete_sequence=["#D4A574", "#FF6B6B"])
+        fig_comp.update_traces(textposition="inside", textinfo="percent+label",
+                               marker=dict(line=dict(color="#0E0B08", width=2)))
+        apply_dark(fig_comp, "고정비 vs 변동비")
+        st.plotly_chart(fig_comp, use_container_width=True)
+
+    with wc2:
+        section_header("고정비 상세 비율")
+        fc_df = pd.DataFrame({"항목": list(monthly_fixed_costs.keys()),
+                               "금액": list(monthly_fixed_costs.values())})
+        fc_df = fc_df.sort_values("금액", ascending=True)
+        fig_fc = px.bar(fc_df, x="금액", y="항목", orientation="h",
+                        color_discrete_sequence=["#F5D5A0"])
+        fig_fc.update_traces(marker_line_width=0, opacity=0.9)
+        apply_dark(fig_fc, "월 고정비 항목별")
+        st.plotly_chart(fig_fc, use_container_width=True)
+
+    st.markdown("")
+    section_header("12개월 예상 수익 추이 (계절 변동 반영)")
+
+    months_list = list(SEASONAL_FACTOR.keys())
+    seasonal_revenue = [monthly_revenue * sf for sf in SEASONAL_FACTOR.values()]
+    seasonal_cost = [total_monthly_cost] * 12
+    seasonal_profit = [r - c for r, c in zip(seasonal_revenue, seasonal_cost)]
+
+    yr_df = pd.DataFrame({"월": months_list, "매출": seasonal_revenue,
+                           "총비용": seasonal_cost, "순이익": seasonal_profit})
+
+    fig_yr = go.Figure()
+    fig_yr.add_trace(go.Scatter(x=yr_df["월"], y=yr_df["매출"], name="매출",
+                                 fill="tozeroy", fillcolor="rgba(212,165,116,0.15)",
+                                 line=dict(color="#D4A574", width=2.5)))
+    fig_yr.add_trace(go.Scatter(x=yr_df["월"], y=yr_df["총비용"], name="총비용",
+                                 line=dict(color="#FF6B6B", width=2, dash="dash")))
+    fig_yr.add_trace(go.Bar(x=yr_df["월"], y=yr_df["순이익"], name="순이익",
+                             marker_color=["#6BCB77" if p >= 0 else "#FF6B6B" for p in seasonal_profit],
+                             opacity=0.6))
+    apply_dark(fig_yr, "월별 매출·비용·순이익 (계절 변동 반영)")
+    fig_yr.update_layout(height=400, barmode="overlay")
+    st.plotly_chart(fig_yr, use_container_width=True)
+
+# ──────────────────────────────────────────────
+# 탭 3: 시간대·요일 분석
+# ──────────────────────────────────────────────
+with tab3:
+    section_header("시간대별 예상 매출 분포")
+
+    # 운영 시간에 맞는 시간대만 필터링
+    filtered_hours = {k: v for k, v in HOUR_WEIGHT.items()
+                      if int(k.split("-")[0]) >= open_hour and int(k.split("-")[1]) <= close_hour}
+
+    if filtered_hours:
+        # 비중 정규화
+        total_w = sum(filtered_hours.values())
+        norm_hours = {k: v / total_w for k, v in filtered_hours.items()}
+
+        hour_rev = {k: daily_revenue * v for k, v in norm_hours.items()}
+        hour_cust = {k: daily_customers * v for k, v in norm_hours.items()}
+
+        hr_df = pd.DataFrame({"시간대": list(hour_rev.keys()),
+                               "예상매출": list(hour_rev.values()),
+                               "예상고객수": list(hour_cust.values())})
+
+        # 피크 시간 색상 구분
+        peak_threshold = hr_df["예상매출"].quantile(0.75)
+        hr_df["구분"] = hr_df["예상매출"].apply(lambda x: "🔥 피크 타임" if x >= peak_threshold else "일반 시간")
+
+        fig_hr = px.bar(hr_df, x="시간대", y="예상매출", color="구분",
+                        color_discrete_map={"🔥 피크 타임": "#D4A574", "일반 시간": "#5C3D2E"},
+                        text=hr_df["예상고객수"].apply(lambda x: f"{x:.0f}명"))
+        fig_hr.update_traces(textposition="outside", textfont=dict(color="#F5D5A0", size=10))
+        apply_dark(fig_hr, "시간대별 예상 매출 (상단: 예상 고객 수)")
+        fig_hr.update_layout(height=400)
+        st.plotly_chart(fig_hr, use_container_width=True)
+
+    st.markdown("")
+    tc1, tc2 = st.columns(2)
+
+    with tc1:
+        section_header("요일별 매출 패턴")
+        day_df = pd.DataFrame({"요일": list(DAY_WEIGHT.keys()),
+                                "매출": [daily_revenue * w for w in DAY_WEIGHT.values()]})
+        fig_day = px.bar(day_df, x="요일", y="매출", color_discrete_sequence=["#D4A574"])
+        fig_day.update_traces(marker_line_width=0, opacity=0.9,
+                              text=day_df["매출"].apply(lambda x: f"{x:,.0f}"),
+                              textposition="outside", textfont=dict(color="#F5D5A0", size=10))
+        apply_dark(fig_day, "요일별 일매출 예상")
+        st.plotly_chart(fig_day, use_container_width=True)
+
+    with tc2:
+        section_header("매출 구성 비율")
+        drink_rev = monthly_revenue * (1 - dessert_ratio)
+        dessert_rev = monthly_revenue * dessert_ratio
+        compose_df = pd.DataFrame({
+            "구분": ["음료", "디저트/사이드"],
+            "금액": [drink_rev, dessert_rev],
+        })
+        fig_compose = px.pie(compose_df, names="구분", values="금액", hole=0.55,
+                             color_discrete_sequence=["#D4A574", "#F5D5A0"])
+        fig_compose.update_traces(textposition="inside", textinfo="percent+label",
+                                   marker=dict(line=dict(color="#0E0B08", width=2)))
+        apply_dark(fig_compose, "음료 vs 디저트 매출")
+        st.plotly_chart(fig_compose, use_container_width=True)
+
+    st.markdown("")
+    section_header("요일 × 시간대 히트맵")
+
+    if filtered_hours:
+        days_list = list(DAY_WEIGHT.keys())
+        hours_list = list(norm_hours.keys())
+        heatmap_data = []
+        for d in days_list:
+            row = [daily_revenue * DAY_WEIGHT[d] * norm_hours[h] for h in hours_list]
+            heatmap_data.append(row)
+
         fig_heat = go.Figure(data=go.Heatmap(
-            z=pivot_heat.values, x=pivot_heat.columns.tolist(), y=pivot_heat.index.tolist(),
-            colorscale=[[0, "#1A1F2E"], [0.5, "#6C63FF"], [1, "#00D2FF"]],
+            z=heatmap_data, x=hours_list, y=days_list,
+            colorscale=[[0, "#1C1410"], [0.5, "#8B6914"], [1, "#D4A574"]],
             hoverongaps=False,
+            colorbar=dict(title="매출(원)"),
         ))
-        st.plotly_chart(apply_dark(fig_heat, "지역 × 카테고리 매출 분포"), use_container_width=True)
-
-        st.markdown("")
-        section_header("매출 구성 트리맵")
-        tree_data = filtered.groupby(["카테고리", "지역"]).agg(매출액=("매출액", "sum")).reset_index()
-        fig_tree = px.treemap(tree_data, path=["카테고리", "지역"], values="매출액",
-                              color="매출액", color_continuous_scale=["#1A1F2E", "#6C63FF", "#00D2FF"])
-        fig_tree.update_traces(marker=dict(line=dict(width=1, color="#0E1117")), textfont=dict(size=13))
-        fig_tree.update_layout(paper_bgcolor="rgba(0,0,0,0)", font=dict(color="#E0E0E0"),
-                               margin=dict(l=10, r=10, t=40, b=10), coloraxis_colorbar=dict(title=""))
-        if True:
-            fig_tree.update_layout(title=dict(text="카테고리 > 지역 매출 구성", font=dict(size=16, color="#C8C8FF")))
-        st.plotly_chart(fig_tree, use_container_width=True)
-
-    with stab3:
-        section_header("요일별 매출 분포 (Box Plot)")
-        box_df = filtered.copy()
-        day_map = {0: "월", 1: "화", 2: "수", 3: "목", 4: "금", 5: "토", 6: "일"}
-        box_df["요일"] = box_df["날짜"].dt.dayofweek.map(day_map)
-        box_df["요일"] = pd.Categorical(box_df["요일"], categories=["월", "화", "수", "목", "금", "토", "일"], ordered=True)
-        box_df = box_df.sort_values("요일")
-        fig_box = px.box(box_df, x="요일", y="매출액", color="카테고리", color_discrete_sequence=COLORS)
-        fig_box.update_traces(marker=dict(opacity=0.6))
-        st.plotly_chart(apply_dark(fig_box, "요일별 카테고리 매출 분포"), use_container_width=True)
-
-        st.markdown("")
-        section_header("월별 카테고리 매출 막대 차트")
-        m_df = filtered.copy()
-        m_df["월"] = m_df["날짜"].dt.month.astype(str) + "월"
-        m_agg = m_df.groupby(["월", "카테고리"]).agg(매출액=("매출액", "sum")).reset_index()
-        fig_mbar = px.bar(m_agg, x="월", y="매출액", color="카테고리", barmode="group",
-                          color_discrete_sequence=COLORS)
-        fig_mbar.update_traces(marker_line_width=0, opacity=0.9)
-        st.plotly_chart(apply_dark(fig_mbar, "월별 카테고리 매출"), use_container_width=True)
+        apply_dark(fig_heat, "요일 × 시간대별 예상 매출 분포")
+        fig_heat.update_layout(height=350)
+        st.plotly_chart(fig_heat, use_container_width=True)
 
 # ──────────────────────────────────────────────
-# 탭 3: 고객 분석
+# 탭 4: 손익분기점 분석
 # ──────────────────────────────────────────────
-with tab_customer:
-    ctab1, ctab2, ctab3 = st.tabs(["🔍 유입 분석", "👤 세그먼트", "⭐ 만족도 · 재구매"])
+with tab4:
+    section_header("손익분기점 (BEP) 핵심 지표")
 
-    with ctab1:
-        section_header("고객 전환 펀넬")
-        fig_fun = go.Figure(go.Funnel(
-            y=funnel_df["단계"], x=funnel_df["사용자수"],
-            textinfo="value+percent initial",
-            marker=dict(color=COLORS[:5], line=dict(width=1, color="#0E1117")),
-            connector=dict(line=dict(color="rgba(108,99,255,0.3)", width=1)),
-        ))
-        fig_fun.update_layout(height=400)
-        st.plotly_chart(apply_dark(fig_fun, "전환 펀넬 분석"), use_container_width=True)
-
-        st.markdown("")
-        fc1, fc2 = st.columns(2)
-        with fc1:
-            section_header("유입 채널별 고객 분포")
-            ch_data = cust_df_all.groupby("유입채널").size().reset_index(name="고객수")
-            fig_ch = px.pie(ch_data, names="유입채널", values="고객수", hole=0.55,
-                            color_discrete_sequence=COLORS)
-            fig_ch.update_traces(textposition="inside", textinfo="percent+label",
-                                 marker=dict(line=dict(color="#0E1117", width=2)))
-            st.plotly_chart(apply_dark(fig_ch, "채널별 고객 비율"), use_container_width=True)
-
-        with fc2:
-            section_header("채널별 평균 구매금액")
-            ch_pur = cust_df_all.groupby("유입채널").agg(평균구매금액=("구매금액", "mean")).reset_index()
-            ch_pur = ch_pur.sort_values("평균구매금액", ascending=True)
-            fig_chb = px.bar(ch_pur, x="평균구매금액", y="유입채널", orientation="h",
-                             color_discrete_sequence=COLORS)
-            fig_chb.update_traces(marker_line_width=0, opacity=0.9)
-            st.plotly_chart(apply_dark(fig_chb, "채널별 평균 구매금액"), use_container_width=True)
-
-    with ctab2:
-        sg1, sg2 = st.columns(2)
-        with sg1:
-            section_header("연령대별 고객 분포")
-            age_d = cust_df_all.groupby("연령대").size().reset_index(name="고객수")
-            age_order = ["10대", "20대", "30대", "40대", "50대", "60대+"]
-            age_d["연령대"] = pd.Categorical(age_d["연령대"], categories=age_order, ordered=True)
-            age_d = age_d.sort_values("연령대")
-            fig_age = px.bar(age_d, x="연령대", y="고객수", color_discrete_sequence=COLORS)
-            fig_age.update_traces(marker_line_width=0, opacity=0.9)
-            st.plotly_chart(apply_dark(fig_age, "연령대별 고객 수"), use_container_width=True)
-
-        with sg2:
-            section_header("성별 매출 기여도")
-            gen_d = cust_df_all.groupby("성별").agg(총구매금액=("구매금액", "sum")).reset_index()
-            fig_gen = px.pie(gen_d, names="성별", values="총구매금액", hole=0.55,
-                             color_discrete_sequence=COLORS)
-            fig_gen.update_traces(textposition="inside", textinfo="percent+label",
-                                  marker=dict(line=dict(color="#0E1117", width=2)))
-            st.plotly_chart(apply_dark(fig_gen, "성별 구매금액 비율"), use_container_width=True)
-
-        st.markdown("")
-        section_header("연령대별 월간 구매 추이")
-        mag = cust_df_all.groupby(["구매월", "연령대"]).agg(구매금액=("구매금액", "sum")).reset_index()
-        mag["구매월"] = mag["구매월"].astype(str) + "월"
-        fig_mag = px.area(mag, x="구매월", y="구매금액", color="연령대", color_discrete_sequence=COLORS)
-        fig_mag.update_traces(line=dict(width=1.5), opacity=0.7)
-        st.plotly_chart(apply_dark(fig_mag, "연령대별 월간 구매금액"), use_container_width=True)
-
-    with ctab3:
-        repeat_rate = cust_df_all["재구매여부"].mean() * 100
-        avg_pur = cust_df_all["구매금액"].mean()
-
-        g1, g2 = st.columns(2)
-        with g1:
-            section_header("재구매율 게이지")
-            fig_g1 = go.Figure(go.Indicator(
-                mode="gauge+number", value=repeat_rate,
-                number=dict(suffix="%", font=dict(size=36, color="#FFFFFF")),
-                gauge=dict(
-                    axis=dict(range=[0, 100], tickcolor="#8B8FA3"),
-                    bar=dict(color="#6C63FF"), bgcolor="rgba(26,31,46,0.8)", borderwidth=0,
-                    steps=[dict(range=[0, 40], color="rgba(255,82,82,0.2)"),
-                           dict(range=[40, 70], color="rgba(255,217,61,0.2)"),
-                           dict(range=[70, 100], color="rgba(0,230,118,0.15)")],
-                    threshold=dict(line=dict(color="#00E676", width=3), thickness=0.8, value=repeat_rate),
-                ),
-            ))
-            fig_g1.update_layout(paper_bgcolor="rgba(0,0,0,0)", font=dict(color="#E0E0E0"),
-                                 height=280, margin=dict(l=30, r=30, t=50, b=20),
-                                 title=dict(text="전체 재구매율", font=dict(size=14, color="#C8C8FF")))
-            st.plotly_chart(fig_g1, use_container_width=True)
-
-        with g2:
-            section_header("평균 구매금액 게이지")
-            fig_g2 = go.Figure(go.Indicator(
-                mode="gauge+number", value=avg_pur / 1000,
-                number=dict(suffix="K", font=dict(size=36, color="#FFFFFF")),
-                gauge=dict(
-                    axis=dict(range=[0, 200], tickcolor="#8B8FA3"),
-                    bar=dict(color="#00D2FF"), bgcolor="rgba(26,31,46,0.8)", borderwidth=0,
-                    steps=[dict(range=[0, 80], color="rgba(255,82,82,0.2)"),
-                           dict(range=[80, 140], color="rgba(255,217,61,0.2)"),
-                           dict(range=[140, 200], color="rgba(0,230,118,0.15)")],
-                    threshold=dict(line=dict(color="#00E676", width=3), thickness=0.8, value=avg_pur / 1000),
-                ),
-            ))
-            fig_g2.update_layout(paper_bgcolor="rgba(0,0,0,0)", font=dict(color="#E0E0E0"),
-                                 height=280, margin=dict(l=30, r=30, t=50, b=20),
-                                 title=dict(text="평균 구매금액 (천원)", font=dict(size=14, color="#C8C8FF")))
-            st.plotly_chart(fig_g2, use_container_width=True)
-
-        st.markdown("")
-        section_header("채널별 재구매율")
-        ch_rep = cust_df_all.groupby("유입채널").agg(재구매율=("재구매여부", "mean"), 고객수=("고객ID", "count")).reset_index()
-        ch_rep["재구매율"] = (ch_rep["재구매율"] * 100).round(1)
-        ch_rep = ch_rep.sort_values("재구매율", ascending=True)
-        fig_rep = px.bar(ch_rep, x="재구매율", y="유입채널", orientation="h", color_discrete_sequence=COLORS)
-        fig_rep.update_traces(marker_line_width=0, opacity=0.9)
-        st.plotly_chart(apply_dark(fig_rep, "채널별 재구매율 (%)"), use_container_width=True)
-
-        st.markdown("")
-        section_header("연령대별 재구매 상세")
-        age_rep = cust_df_all.groupby("연령대").agg(
-            재구매율=("재구매여부", "mean"), 평균구매금액=("구매금액", "mean"), 고객수=("고객ID", "count")).reset_index()
-        age_rep["재구매율"] = (age_rep["재구매율"] * 100).round(1)
-        age_rep["평균구매금액"] = age_rep["평균구매금액"].astype(int)
-        st.dataframe(
-            age_rep.style.background_gradient(subset=["재구매율"], cmap="RdYlGn")
-                .background_gradient(subset=["평균구매금액"], cmap="Blues")
-                .format({"재구매율": "{:.1f}%", "평균구매금액": "{:,}원"}),
-            use_container_width=True, hide_index=True,
-        )
-
-# ──────────────────────────────────────────────
-# 탭 4: 데이터 관리
-# ──────────────────────────────────────────────
-with tab_data:
-    dtab1, dtab2, dtab3 = st.tabs(["🔍 데이터 탐색", "📐 피벗 분석", "📥 다운로드"])
-
-    with dtab1:
-        section_header("인터랙티브 데이터 편집기")
-        max_rows = st.slider("표시 행 수", 10, 500, 100)
-        explore_df = filtered.head(max_rows)
-        st.caption(f"📌 총 {len(filtered):,}건 중 상위 {max_rows}건 표시")
-
-        st.data_editor(
-            explore_df, use_container_width=True, hide_index=True,
-            num_rows="dynamic", height=450,
-            column_config={
-                "날짜": st.column_config.DateColumn("날짜", format="YYYY-MM-DD"),
-                "매출액": st.column_config.NumberColumn("매출액", format="%d원"),
-                "주문수": st.column_config.NumberColumn("주문수", format="%d건"),
-                "방문자수": st.column_config.NumberColumn("방문자수", format="%d명"),
-                "고객만족도": st.column_config.NumberColumn("고객만족도", format="%.1f"),
-            },
-        )
-
-        st.markdown("")
-        section_header("요약 통계")
-        desc = explore_df.select_dtypes(include="number").describe().T
-        desc.columns = ["건수", "평균", "표준편차", "최소", "25%", "50%", "75%", "최대"]
-        st.dataframe(desc.style.format("{:,.1f}").background_gradient(cmap="Blues", subset=["평균"]),
-                     use_container_width=True)
-
-    with dtab2:
-        section_header("동적 피벗 테이블")
-        pc1, pc2, pc3 = st.columns(3)
-        with pc1:
-            pv_row = st.selectbox("행 (Index)", ["카테고리", "지역", "요일"])
-        with pc2:
-            pv_col = st.selectbox("열 (Columns)", ["지역", "카테고리"])
-        with pc3:
-            pv_val = st.selectbox("값 (Values)", ["매출액", "주문수", "방문자수", "고객만족도"])
-        pv_agg = st.radio("집계 함수", ["합계", "평균", "최대", "최소"], horizontal=True)
-        agg_map = {"합계": "sum", "평균": "mean", "최대": "max", "최소": "min"}
-
-        pv_df = filtered.copy()
-        pv_df["요일"] = pv_df["날짜"].dt.dayofweek.map({0:"월",1:"화",2:"수",3:"목",4:"금",5:"토",6:"일"})
-
-        if pv_row != pv_col:
-            pv_result = pd.pivot_table(pv_df, values=pv_val, index=pv_row, columns=pv_col,
-                                       aggfunc=agg_map[pv_agg], fill_value=0)
-            st.dataframe(pv_result.style.format("{:,.0f}").background_gradient(cmap="YlOrRd"),
-                         use_container_width=True)
-
-            st.markdown("")
-            section_header("피벗 결과 시각화")
-            pv_m = pv_result.reset_index().melt(id_vars=pv_row, var_name=pv_col, value_name=pv_val)
-            fig_pv = px.bar(pv_m, x=pv_row, y=pv_val, color=pv_col, barmode="group",
-                            color_discrete_sequence=COLORS)
-            fig_pv.update_traces(marker_line_width=0, opacity=0.9)
-            st.plotly_chart(apply_dark(fig_pv, f"{pv_row}별 {pv_val} ({pv_agg})"), use_container_width=True)
+    b1, b2, b3 = st.columns(3)
+    with b1:
+        kpi_card("💵", "BEP 일매출", f"{bep_daily_revenue:,.0f}원",
+                 f"현재 일매출: {daily_revenue:,.0f}원",
+                 "positive" if daily_revenue >= bep_daily_revenue else "negative")
+    with b2:
+        kpi_card("👤", "BEP 일고객수", f"{bep_daily_customers:.0f}명",
+                 f"현재 예상: {daily_customers}명",
+                 "positive" if daily_customers >= bep_daily_customers else "negative")
+    with b3:
+        if months_to_recover < float('inf') and months_to_recover > 0:
+            recover_text = f"{months_to_recover:.1f}개월"
+            recover_delta = f"약 {months_to_recover / 12:.1f}년"
+            recover_status = "positive" if months_to_recover <= 36 else "negative"
         else:
-            st.warning("행과 열에 서로 다른 필드를 선택해주세요.")
+            recover_text = "회수 불가"
+            recover_delta = "적자 상태"
+            recover_status = "negative"
+        kpi_card("⏱️", "투자금 회수 기간", recover_text, recover_delta, recover_status)
 
-    with dtab3:
-        section_header("데이터 다운로드 센터")
-        dl1, dl2 = st.columns(2)
-        with dl1:
-            st.markdown("""<div class="kpi-card">
-                <div class="kpi-icon">📄</div>
-                <div class="kpi-value" style="font-size:1.1rem;">CSV 다운로드</div>
-                <div class="kpi-label" style="margin-top:8px;">필터 적용된 매출 데이터</div>
-            </div>""", unsafe_allow_html=True)
-            st.markdown("")
-            csv = filtered.to_csv(index=False).encode("utf-8-sig")
-            st.download_button("📥 CSV 다운로드", csv, "biz_analytics_data.csv", "text/csv",
-                               use_container_width=True)
-        with dl2:
-            st.markdown("""<div class="kpi-card">
-                <div class="kpi-icon">📊</div>
-                <div class="kpi-value" style="font-size:1.1rem;">Excel 다운로드</div>
-                <div class="kpi-label" style="margin-top:8px;">필터 적용된 매출 데이터</div>
-            </div>""", unsafe_allow_html=True)
-            st.markdown("")
-            buf = io.BytesIO()
-            with pd.ExcelWriter(buf, engine="openpyxl") as writer:
-                filtered.to_excel(writer, index=False, sheet_name="매출데이터")
-            buf.seek(0)
-            st.download_button("📥 Excel 다운로드", buf, "biz_analytics_data.xlsx",
-                               "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-                               use_container_width=True)
+    st.markdown("")
+    st.divider()
 
-        st.markdown("")
-        st.caption(f"📌 현재 필터 적용 데이터: {len(filtered):,}건")
+    # ── BEP 교차 차트 ──
+    section_header("일 고객 수별 매출 vs 비용 (BEP 교차점)")
+
+    cust_range = list(range(10, max(daily_customers * 3, 200), 5))
+    revenue_line = [c * avg_unit_price for c in cust_range]
+    daily_fixed = total_monthly_fixed / operating_days
+    cost_line = [daily_fixed + c * avg_unit_price * cost_ratio for c in cust_range]
+
+    fig_bep = go.Figure()
+    fig_bep.add_trace(go.Scatter(x=cust_range, y=revenue_line, name="매출",
+                                  line=dict(color="#6BCB77", width=2.5)))
+    fig_bep.add_trace(go.Scatter(x=cust_range, y=cost_line, name="비용",
+                                  line=dict(color="#FF6B6B", width=2.5)))
+
+    # BEP 포인트 표시
+    fig_bep.add_vline(x=bep_daily_customers, line_dash="dash",
+                       line_color="#D4A574", annotation_text=f"BEP: {bep_daily_customers:.0f}명",
+                       annotation_font=dict(color="#D4A574", size=13))
+
+    # 현재 위치 표시
+    fig_bep.add_vline(x=daily_customers, line_dash="dot",
+                       line_color="#5DADE2", annotation_text=f"현재: {daily_customers}명",
+                       annotation_font=dict(color="#5DADE2", size=13),
+                       annotation_position="top left")
+
+    apply_dark(fig_bep, "손익분기점 분석")
+    fig_bep.update_layout(height=450, xaxis_title="일 고객 수 (명)", yaxis_title="금액 (원)")
+    st.plotly_chart(fig_bep, use_container_width=True)
+
+    st.markdown("")
+
+    # ── 투자금 회수 타임라인 ──
+    section_header("투자금 회수 타임라인 (36개월)")
+
+    cumulative = []
+    cum_sum = 0
+    month_labels = []
+    for i in range(36):
+        m_idx = i % 12
+        s_factor = list(SEASONAL_FACTOR.values())[m_idx]
+        m_rev = monthly_revenue * s_factor
+        m_profit = m_rev - total_monthly_cost
+        cum_sum += m_profit
+        cumulative.append(cum_sum)
+        month_labels.append(f"{i + 1}개월")
+
+    invest_line = total_startup_with_reserve * 10000
+
+    fig_recover = go.Figure()
+    fig_recover.add_trace(go.Scatter(
+        x=month_labels, y=cumulative, name="누적 순이익",
+        fill="tozeroy",
+        fillcolor="rgba(107,203,119,0.15)" if cumulative[-1] > 0 else "rgba(255,107,107,0.15)",
+        line=dict(color="#6BCB77" if cumulative[-1] > 0 else "#FF6B6B", width=2.5),
+    ))
+    fig_recover.add_hline(y=invest_line, line_dash="dash", line_color="#D4A574",
+                           annotation_text=f"초기 투자금: {invest_line:,.0f}원",
+                           annotation_font=dict(color="#D4A574", size=12))
+    fig_recover.add_hline(y=0, line_dash="solid", line_color="rgba(255,255,255,0.2)")
+
+    apply_dark(fig_recover, "누적 순이익 vs 초기 투자금")
+    fig_recover.update_layout(height=400, xaxis_title="경과 개월", yaxis_title="누적 금액 (원)")
+    st.plotly_chart(fig_recover, use_container_width=True)
+
+    # 회수 시점 메시지
+    recovered_month = None
+    for i, c in enumerate(cumulative):
+        if c >= invest_line:
+            recovered_month = i + 1
+            break
+
+    if recovered_month:
+        st.success(f"✅ 투자금 회수 예상 시점: **{recovered_month}개월** 후 (약 {recovered_month / 12:.1f}년)")
+    elif monthly_profit > 0:
+        st.warning(f"⚠️ 36개월 내 투자금 회수 어려움. 예상 회수 기간: **{months_to_recover:.0f}개월** ({months_to_recover/12:.1f}년)")
+    else:
+        st.error("❌ 현재 설정으로는 적자 상태입니다. 매출을 늘리거나 비용을 줄여야 합니다.")
+
+# ──────────────────────────────────────────────
+# 탭 5: 시나리오 비교
+# ──────────────────────────────────────────────
+with tab5:
+    section_header("시나리오 변동폭 설정")
+
+    sv1, sv2 = st.columns(2)
+    with sv1:
+        optimistic_boost = st.slider("낙관적 시나리오 — 고객수 증가율 (%)", 5, 50, 20)
+    with sv2:
+        pessimistic_drop = st.slider("비관적 시나리오 — 고객수 감소율 (%)", 5, 50, 20)
+
+    price_opt_boost = optimistic_boost // 2
+    price_pes_drop = pessimistic_drop // 2
+
+    def calc_scenario(cust_mult, price_mult):
+        s_daily_cust = int(daily_customers * cust_mult)
+        s_unit_price = int(avg_unit_price * price_mult)
+        s_daily_rev = s_daily_cust * s_unit_price
+        s_monthly_rev = s_daily_rev * operating_days
+        s_variable = int(s_monthly_rev * cost_ratio)
+        s_card_fee = int(s_monthly_rev * card_fee_rate)
+        s_fixed = total_monthly_fixed - monthly_fixed_costs["카드수수료"] + s_card_fee
+        s_total_cost = s_fixed + s_variable
+        s_profit = s_monthly_rev - s_total_cost
+        s_margin = (s_profit / max(s_monthly_rev, 1)) * 100
+        s_bep_daily = s_fixed / max(1 - cost_ratio, 0.01) / max(operating_days, 1)
+        s_recover = total_startup_with_reserve * 10000 / max(s_profit, 1) if s_profit > 0 else float('inf')
+        return {
+            "일고객수": s_daily_cust, "객단가": s_unit_price,
+            "월매출": s_monthly_rev, "월비용": s_total_cost,
+            "순이익": s_profit, "순이익률": s_margin,
+            "BEP일매출": s_bep_daily, "회수기간": s_recover,
+        }
+
+    base = calc_scenario(1.0, 1.0)
+    opti = calc_scenario(1 + optimistic_boost / 100, 1 + price_opt_boost / 100)
+    pess = calc_scenario(1 - pessimistic_drop / 100, 1 - price_pes_drop / 100)
+
+    st.markdown("")
+    section_header("3-시나리오 비교 테이블")
+
+    comp_table = pd.DataFrame({
+        "지표": ["일 고객수", "평균 객단가", "월 매출", "월 비용", "월 순이익", "순이익률", "투자금 회수"],
+        "😰 비관적": [
+            f"{pess['일고객수']}명", f"{pess['객단가']:,}원",
+            f"{pess['월매출']:,.0f}원", f"{pess['월비용']:,.0f}원",
+            f"{pess['순이익']:,.0f}원", f"{pess['순이익률']:.1f}%",
+            f"{pess['회수기간']:.1f}개월" if pess['회수기간'] < float('inf') else "회수 불가",
+        ],
+        "📊 기본": [
+            f"{base['일고객수']}명", f"{base['객단가']:,}원",
+            f"{base['월매출']:,.0f}원", f"{base['월비용']:,.0f}원",
+            f"{base['순이익']:,.0f}원", f"{base['순이익률']:.1f}%",
+            f"{base['회수기간']:.1f}개월" if base['회수기간'] < float('inf') else "회수 불가",
+        ],
+        "🚀 낙관적": [
+            f"{opti['일고객수']}명", f"{opti['객단가']:,}원",
+            f"{opti['월매출']:,.0f}원", f"{opti['월비용']:,.0f}원",
+            f"{opti['순이익']:,.0f}원", f"{opti['순이익률']:.1f}%",
+            f"{opti['회수기간']:.1f}개월" if opti['회수기간'] < float('inf') else "회수 불가",
+        ],
+    })
+    st.dataframe(comp_table, use_container_width=True, hide_index=True)
+
+    st.markdown("")
+    section_header("시나리오별 매출 · 비용 · 순이익 비교")
+
+    scenarios = ["😰 비관적", "📊 기본", "🚀 낙관적"]
+    revenues = [pess["월매출"], base["월매출"], opti["월매출"]]
+    costs = [pess["월비용"], base["월비용"], opti["월비용"]]
+    profits = [pess["순이익"], base["순이익"], opti["순이익"]]
+
+    fig_sc = go.Figure()
+    fig_sc.add_trace(go.Bar(name="매출", x=scenarios, y=revenues,
+                             marker_color="#D4A574", opacity=0.9))
+    fig_sc.add_trace(go.Bar(name="비용", x=scenarios, y=costs,
+                             marker_color="#FF6B6B", opacity=0.9))
+    fig_sc.add_trace(go.Bar(name="순이익", x=scenarios, y=profits,
+                             marker_color="#6BCB77", opacity=0.9))
+    apply_dark(fig_sc, "시나리오별 비교")
+    fig_sc.update_layout(barmode="group", height=400)
+    st.plotly_chart(fig_sc, use_container_width=True)
+
+    st.markdown("")
+    section_header("36개월 누적 순이익 추이 비교")
+
+    def calc_cumulative(scenario):
+        cum = []
+        s = 0
+        for i in range(36):
+            sf = list(SEASONAL_FACTOR.values())[i % 12]
+            s += scenario["월매출"] * sf / monthly_revenue * scenario["순이익"] if monthly_revenue > 0 else scenario["순이익"]
+            cum.append(s)
+        return cum
+
+    cum_base = calc_cumulative(base)
+    cum_opti = calc_cumulative(opti)
+    cum_pess = calc_cumulative(pess)
+
+    fig_cum = go.Figure()
+    fig_cum.add_trace(go.Scatter(x=list(range(1, 37)), y=cum_pess, name="😰 비관적",
+                                  line=dict(color="#FF6B6B", width=2)))
+    fig_cum.add_trace(go.Scatter(x=list(range(1, 37)), y=cum_base, name="📊 기본",
+                                  line=dict(color="#D4A574", width=2.5)))
+    fig_cum.add_trace(go.Scatter(x=list(range(1, 37)), y=cum_opti, name="🚀 낙관적",
+                                  line=dict(color="#6BCB77", width=2)))
+    fig_cum.add_hline(y=invest_line, line_dash="dash", line_color="#F5D5A0",
+                       annotation_text="초기 투자금", annotation_font=dict(color="#F5D5A0"))
+    fig_cum.add_hline(y=0, line_dash="solid", line_color="rgba(255,255,255,0.2)")
+
+    apply_dark(fig_cum, "시나리오별 36개월 누적 순이익")
+    fig_cum.update_layout(height=400, xaxis_title="경과 개월", yaxis_title="누적 금액 (원)")
+    st.plotly_chart(fig_cum, use_container_width=True)
+
+    # ── 리스크 평가 ──
+    st.markdown("")
+    section_header("종합 리스크 평가")
+
+    if pess["순이익"] > 0:
+        st.success("✅ **안정적**: 비관적 시나리오에서도 흑자를 유지합니다. 리스크가 낮은 사업 모델입니다.")
+    elif base["순이익"] > 0:
+        st.warning("⚠️ **보통**: 기본 시나리오에서는 흑자이나, 비관적 상황에서 적자 가능성이 있습니다. "
+                   "비용 절감 또는 차별화 전략을 준비하세요.")
+    else:
+        st.error("❌ **위험**: 기본 시나리오에서도 적자입니다. 사업 모델을 근본적으로 재검토해야 합니다. "
+                 "면적 축소, 인력 조정, 객단가 인상 등을 고려하세요.")
+
+    # 구체적 개선 제안
+    if monthly_profit < 0:
+        with st.expander("💡 수익 개선 제안 보기"):
+            suggestions = []
+            if monthly_rent * 10000 / monthly_revenue > 0.15:
+                suggestions.append(f"🏠 **임대료 비중 과다** ({monthly_rent * 10000 / monthly_revenue * 100:.1f}%): "
+                                   f"매출 대비 임대료 비중이 15%를 초과합니다. 더 작은 면적이나 낮은 등급의 상권을 고려하세요.")
+            if total_labor / monthly_revenue > 0.25:
+                suggestions.append(f"👥 **인건비 비중 과다** ({total_labor / monthly_revenue * 100:.1f}%): "
+                                   f"매출 대비 인건비가 25%를 초과합니다. 사장 직접 근무 비율을 높이거나 파트타임을 줄여보세요.")
+            if cost_ratio > 0.38:
+                suggestions.append(f"📦 **원재료비 비중 과다** ({cost_ratio * 100:.0f}%): "
+                                   f"업계 평균(30~35%)를 초과합니다. 원두 납품처 변경이나 메뉴 포트폴리오를 최적화하세요.")
+            if not suggestions:
+                suggestions.append("전반적인 비용 구조 개선이 필요합니다. 면적 축소, 위치 변경, 메뉴 전략 수정을 종합적으로 검토하세요.")
+            for s in suggestions:
+                st.markdown(f"- {s}")
